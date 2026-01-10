@@ -29,7 +29,7 @@ services:
       dockerfile: Dockerfile
     container_name: wsrest-app
     ports:
-      - "8080:8080"
+      - "9090:9090"
     environment:
       DB_HOST: db
       DB_PORT: 3306
