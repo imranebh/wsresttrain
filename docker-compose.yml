@@ -6,7 +6,7 @@ services:
     image: mysql:8.0
     container_name: wsrest-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: train_management
     ports:
       - "3307:3306"
@@ -15,7 +15,7 @@ services:
       - ./database.sql:/docker-entrypoint-initdb.d/01-schema.sql
       - ./seed_trains.sql:/docker-entrypoint-initdb.d/02-seed.sql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -35,7 +35,7 @@ services:
       DB_PORT: 3306
       DB_NAME: train_management
       DB_USER: root
-      DB_PASSWORD: root
+      DB_PASSWORD: ""
     depends_on:
       db:
         condition: service_healthy
